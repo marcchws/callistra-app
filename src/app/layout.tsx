@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Red_Hat_Display, Lato } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const redHatDisplay = Red_Hat_Display({
   subsets: ["latin"],
+  variable: "--font-red-hat-display",
+  display: "swap",
+});
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lato",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Callistra - Gestão de Escritórios de Advocacia",
-  description: "Sistema SaaS para otimizar a gestão de escritórios de advocacia e advogados associados. Simplifique processos, aumente a produtividade e automatize tarefas relacionadas à abertura e acompanhamento de processos judiciais.",
+  title: "Callistra | Software de Gestão para Escritórios de Advocacia",
+  description: "Callistra: o software de gestão completo para seu escritório de advocacia. Otimize processos, aumente a produtividade e simplifique sua rotina.",
+  keywords: ["software para advogados", "gestão de escritório de advocacia", "sistema para processos jurídicos"],
+  authors: [{ name: "Callistra" }],
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -20,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${inter.variable} antialiased`}
+        className={`${redHatDisplay.variable} ${lato.variable} antialiased`}
       >
         {children}
       </body>
