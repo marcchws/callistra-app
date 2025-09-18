@@ -65,9 +65,7 @@ export function ContentDebugPanel() {
     }
   };
 
-  if (process.env.NODE_ENV !== 'development') {
-    return null;
-  }
+  // Painel disponível em todos os ambientes para testes
 
   return (
     <>
