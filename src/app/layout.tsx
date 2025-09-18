@@ -16,6 +16,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://callistra.com.br'),
   title: "Callistra | Software de Gestão para Escritórios de Advocacia",
   description: "Callistra: o software de gestão completo para seu escritório de advocacia. Otimize processos, aumente a produtividade e simplifique sua rotina jurídica. Mais de 500 escritórios confiam em nós.",
   keywords: [

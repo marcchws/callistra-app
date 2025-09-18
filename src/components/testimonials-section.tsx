@@ -32,7 +32,7 @@ const TestimonialCard = ({ name, role, company, content, avatar, rating }: Testi
         <Quote className="w-8 h-8 text-primary/20 mb-4" />
         
         <p className="text-muted-foreground mb-6 flex-grow italic">
-          "{content}"
+          &ldquo;{content}&rdquo;
         </p>
         
         <div className="flex items-center">

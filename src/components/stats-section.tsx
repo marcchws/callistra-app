@@ -12,6 +12,23 @@ const StatItem = ({ number, label, suffix = '' }: StatItemProps) => {
   const [count, setCount] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
 
+  const animateCount = React.useCallback(() => {
+    const duration = 2000
+    const steps = 60
+    const increment = number / steps
+    let current = 0
+
+    const timer = setInterval(() => {
+      current += increment
+      if (current >= number) {
+        setCount(number)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(current))
+      }
+    }, duration / steps)
+  }, [number])
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -29,24 +46,7 @@ const StatItem = ({ number, label, suffix = '' }: StatItemProps) => {
     }
 
     return () => observer.disconnect()
-  }, [isVisible])
-
-  const animateCount = () => {
-    const duration = 2000
-    const steps = 60
-    const increment = number / steps
-    let current = 0
-
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= number) {
-        setCount(number)
-        clearInterval(timer)
-      } else {
-        setCount(Math.floor(current))
-      }
-    }, duration / steps)
-  }
+  }, [isVisible, animateCount, label])
 
   return (
     <div 
