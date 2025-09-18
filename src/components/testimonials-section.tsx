@@ -1,9 +1,10 @@
 'use client'
 import React from 'react'
+import { EditableTextSimple } from '@/components/editable-text-simple'
+import { EditableTestimonials } from '@/components/editable-testimonials'
 import { Card, CardContent } from '@/components/ui/card'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { AnimatedGroup } from '@/components/animations'
 import { Star, Quote } from 'lucide-react'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
 interface TestimonialProps {
   name: string
@@ -54,8 +55,9 @@ const TestimonialCard = ({ name, role, company, content, avatar, rating }: Testi
 }
 
 export default function TestimonialsSection() {
-  const testimonials = [
+  const defaultTestimonials = [
     {
+      id: "carlos-mendes",
       name: "Dr. Carlos Mendes",
       role: "Sócio Fundador",
       company: "Mendes & Associados",
@@ -63,6 +65,7 @@ export default function TestimonialsSection() {
       rating: 5
     },
     {
+      id: "ana-silva",
       name: "Dra. Ana Silva",
       role: "Advogada",
       company: "Silva Advocacia",
@@ -70,6 +73,7 @@ export default function TestimonialsSection() {
       rating: 5
     },
     {
+      id: "roberto-santos",
       name: "Dr. Roberto Santos",
       role: "Diretor Jurídico",
       company: "Santos & Cia",
@@ -82,19 +86,27 @@ export default function TestimonialsSection() {
     <section className="py-16 md:py-24 bg-white">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold text-primary mb-4">
+          <EditableTextSimple
+            id="testimonials-title"
+            section="testimonials"
+            as="h2"
+            className="text-3xl md:text-4xl font-semibold text-primary mb-4">
             O que nossos clientes dizem
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          </EditableTextSimple>
+          <EditableTextSimple
+            id="testimonials-subtitle"
+            section="testimonials"
+            as="p"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Mais de 500 escritórios confiam no Callistra para otimizar sua gestão jurídica
-          </p>
+          </EditableTextSimple>
         </div>
-        
-        <AnimatedGroup className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} {...testimonial} />
-          ))}
-        </AnimatedGroup>
+
+        <EditableTestimonials
+          id="testimonials-data"
+          section="testimonials"
+          testimonials={defaultTestimonials}
+        />
       </div>
     </section>
   )

@@ -1,11 +1,19 @@
 'use client'
-import React from 'react'
-import Image from 'next/image'
+import React, { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { TextEffect, AnimatedGroup } from '@/components/animations'
 import { CallistraHeader } from '@/components/header'
+import { EditableTextSimple } from '@/components/editable-text-simple'
+import { EditableImageSimple } from '@/components/editable-image-simple'
+import { useContentEditor } from '@/components/content-editor-provider'
 
 export default function CalllistraHeroNew() {
+    const { loadContent } = useContentEditor();
+
+    useEffect(() => {
+        loadContent();
+    }, [loadContent]);
+
     const scrollToPlanos = () => {
         const element = document.getElementById("planos");
         if (element) {
@@ -36,17 +44,20 @@ export default function CalllistraHeroNew() {
                         <div className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"></div>
                         <div className="mx-auto max-w-7xl px-6">
                             <div className="sm:mx-auto lg:mr-auto lg:mt-0">
-                                <TextEffect
+                                <EditableTextSimple
+                                    id="hero-title"
+                                    section="hero"
                                     as="h1"
                                     className="mt-8 max-w-2xl text-balance text-5xl font-medium md:text-6xl lg:mt-16 text-primary">
-                                    Otimizando a gestão jurídica com <span className="text-secondary-foreground">Callistra</span>
-                                </TextEffect>
-                                <TextEffect
+                                    Otimizando a gestão jurídica com Callistra
+                                </EditableTextSimple>
+                                <EditableTextSimple
+                                    id="hero-subtitle"
+                                    section="hero"
                                     as="p"
                                     className="mt-8 max-w-2xl text-pretty text-lg text-muted-foreground">
-                                    O Callistra é a plataforma completa para gestão de escritórios de advocacia.
-                                    Otimize processos, aumente a produtividade e foque no que realmente importa: seus clientes.
-                                </TextEffect>
+                                    O Callistra é a plataforma completa para gestão de escritórios de advocacia. Otimize processos, aumente a produtividade e foque no que realmente importa: seus clientes.
+                                </EditableTextSimple>
 
                                 <AnimatedGroup
                                     className="mt-12 flex items-center gap-2">
@@ -57,7 +68,12 @@ export default function CalllistraHeroNew() {
                                             onClick={scrollToPlanos}
                                             size="lg"
                                             className="rounded-xl px-5 text-base bg-primary hover:bg-primary/90">
-                                            <span className="text-nowrap">Ver Planos</span>
+                                            <EditableTextSimple
+                                                id="hero-button-primary"
+                                                section="hero"
+                                                className="text-nowrap">
+                                                Ver Planos
+                                            </EditableTextSimple>
                                         </Button>
                                     </div>
                                     <Button
@@ -66,7 +82,12 @@ export default function CalllistraHeroNew() {
                                         size="lg"
                                         variant="ghost"
                                         className="h-10.5 rounded-xl px-5 text-base text-secondary-foreground hover:text-primary">
-                                        <span className="text-nowrap">Falar com Especialista</span>
+                                        <EditableTextSimple
+                                            id="hero-button-secondary"
+                                            section="hero"
+                                            className="text-nowrap">
+                                            Falar com Especialista
+                                        </EditableTextSimple>
                                     </Button>
                                 </AnimatedGroup>
                             </div>
@@ -75,7 +96,9 @@ export default function CalllistraHeroNew() {
                             <div className="mask-b-from-55% relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
                                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-7xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
                                     <div className="aspect-15/8 relative bg-muted rounded-2xl overflow-hidden">
-                                        <Image
+                                        <EditableImageSimple
+                                            id="hero-main-image"
+                                            section="hero"
                                             src="/callistra-sistema-tarefas.png"
                                             alt="Interface do Callistra - Sistema de Gestão de Tarefas"
                                             className="w-full h-full object-cover"

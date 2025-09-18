@@ -1,6 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { AnimatedGroup } from '@/components/animations'
+import { EditableTextSimple } from '@/components/editable-text-simple'
+import { EditableStats } from '@/components/editable-stats'
 
 interface StatItemProps {
   number: number
@@ -64,36 +66,38 @@ const StatItem = ({ number, label, suffix = '' }: StatItemProps) => {
 }
 
 export default function StatsSection() {
-  const stats = [
-    { number: 500, label: 'Escritórios Atendidos', suffix: '+' },
-    { number: 15000, label: 'Processos Gerenciados', suffix: '+' },
-    { number: 98, label: 'Satisfação dos Clientes', suffix: '%' },
-    { number: 24, label: 'Suporte Disponível', suffix: '/7' }
+  const defaultStats = [
+    { id: 'escritorios', number: 500, label: 'Escritórios Atendidos', suffix: '+' },
+    { id: 'processos', number: 15000, label: 'Processos Gerenciados', suffix: '+' },
+    { id: 'satisfacao', number: 98, label: 'Satisfação dos Clientes', suffix: '%' },
+    { id: 'suporte', number: 24, label: 'Suporte Disponível', suffix: '/7' }
   ]
 
   return (
     <section className="bg-gradient-to-br from-primary/5 to-secondary/5 py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold text-primary mb-4">
+          <EditableTextSimple
+            id="stats-title"
+            section="stats"
+            as="h2"
+            className="text-3xl md:text-4xl font-semibold text-primary mb-4">
             Números que comprovam nossa excelência
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          </EditableTextSimple>
+          <EditableTextSimple
+            id="stats-subtitle"
+            section="stats"
+            as="p"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Mais de uma década transformando a gestão jurídica com resultados comprovados
-          </p>
+          </EditableTextSimple>
         </div>
-        
-        <AnimatedGroup className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          {stats.map((stat, index) => (
-            <div key={index}>
-              <StatItem 
-                number={stat.number} 
-                label={stat.label} 
-                suffix={stat.suffix}
-              />
-            </div>
-          ))}
-        </AnimatedGroup>
+
+        <EditableStats
+          id="stats-data"
+          section="stats"
+          stats={defaultStats}
+        />
       </div>
     </section>
   )

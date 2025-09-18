@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Phone, Mail, MessageCircle } from "lucide-react";
+import { EditableTextSimple } from "@/components/editable-text-simple";
+import { EditableContactMethods } from "@/components/editable-contact-methods";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -71,19 +72,22 @@ export function ContactSection() {
 
   const contactMethods = [
     {
-      icon: Phone,
+      id: "phone",
+      icon: "Phone",
       title: "Telefone",
       value: "+55 (11) 4004-1234",
       action: "tel:+5511400412 34",
     },
     {
-      icon: MessageCircle,
+      id: "whatsapp",
+      icon: "MessageCircle",
       title: "WhatsApp",
       value: "+55 (11) 91234-5678",
       action: "https://wa.me/5511912345678",
     },
     {
-      icon: Mail,
+      id: "email",
+      icon: "Mail",
       title: "E-mail",
       value: "contato@callistra.com.br",
       action: "mailto:contato@callistra.com.br",
@@ -94,13 +98,21 @@ export function ContactSection() {
     <section id="contato" className="py-20 bg-muted">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+          <EditableTextSimple
+            id="contact-title"
+            section="contact"
+            as="h2"
+            className="text-3xl md:text-4xl font-bold text-primary mb-4">
             Fale com um especialista
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          </EditableTextSimple>
+          <EditableTextSimple
+            id="contact-subtitle"
+            section="contact"
+            as="p"
+            className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Entre em contato conosco e descubra como o Callistra pode transformar
             a gestão do seu escritório de advocacia.
-          </p>
+          </EditableTextSimple>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
@@ -108,12 +120,20 @@ export function ContactSection() {
           <div className="lg:order-1">
             <Card className="border-0 shadow-lg h-full flex flex-col">
               <CardHeader className="flex-shrink-0">
-                <CardTitle className="text-2xl text-primary">
+                <EditableTextSimple
+                  id="contact-form-title"
+                  section="contact"
+                  as="h3"
+                  className="text-2xl text-primary">
                   Solicite uma demonstração
-                </CardTitle>
-                <CardDescription>
+                </EditableTextSimple>
+                <EditableTextSimple
+                  id="contact-form-description"
+                  section="contact"
+                  as="p"
+                  className="text-sm text-muted-foreground">
                   Preencha os dados abaixo e entraremos em contato em até 24 horas.
-                </CardDescription>
+                </EditableTextSimple>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col">
                 <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col">
@@ -197,33 +217,19 @@ export function ContactSection() {
 
           {/* Contact Methods */}
           <div className="lg:order-2 space-y-4">
-            <h3 className="text-xl font-semibold text-primary mb-4">
+            <EditableTextSimple
+              id="contact-methods-title"
+              section="contact"
+              as="h3"
+              className="text-xl font-semibold text-primary mb-4">
               Outras formas de contato
-            </h3>
+            </EditableTextSimple>
 
-            {contactMethods.map((method, index) => {
-              const Icon = method.icon;
-              return (
-                <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300">
-                  <CardContent className="p-4">
-                    <a
-                      href={method.action}
-                      target={method.action.startsWith('http') ? '_blank' : undefined}
-                      rel={method.action.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="flex items-center space-x-4 hover:text-primary transition-colors"
-                    >
-                      <div className="w-12 h-12 bg-secondary-foreground rounded-full flex items-center justify-center">
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-primary">{method.title}</h4>
-                        <p className="text-muted-foreground">{method.value}</p>
-                      </div>
-                    </a>
-                  </CardContent>
-                </Card>
-              );
-            })}
+            <EditableContactMethods
+              id="contact-methods"
+              section="contact"
+              contactMethods={contactMethods}
+            />
           </div>
         </div>
       </div>

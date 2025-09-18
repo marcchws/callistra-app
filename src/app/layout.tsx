@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Red_Hat_Display, Lato } from "next/font/google";
 import "./globals.css";
+import { ContentEditorProvider } from "@/components/content-editor-provider";
 
 const redHatDisplay = Red_Hat_Display({
   subsets: ["latin"],
@@ -87,7 +88,9 @@ export default function RootLayout({
       <body
         className={`${redHatDisplay.variable} ${lato.variable} antialiased`}
       >
-        {children}
+        <ContentEditorProvider>
+          {children}
+        </ContentEditorProvider>
       </body>
     </html>
   );
