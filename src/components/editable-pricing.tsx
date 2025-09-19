@@ -269,6 +269,11 @@ export function EditablePricing({
 
 // Componente auxiliar para renderizar um plano
 function PlanCard({ plan }: { plan: PlanData }) {
+  const handlePlanClick = () => {
+    // Redirecionar para registro com o plano selecionado
+    window.location.href = `/registro?plan=${plan.id}`;
+  };
+
   return (
     <Card className={cn(
       "flex flex-col h-full shadow-sm hover:shadow-md transition-shadow duration-200",
@@ -308,7 +313,11 @@ function PlanCard({ plan }: { plan: PlanData }) {
       </CardContent>
 
       <div className="p-6 pt-0">
-        <Button className="w-full" variant={plan.isPopular ? "default" : "outline"}>
+        <Button 
+          className="w-full" 
+          variant={plan.isPopular ? "default" : "outline"}
+          onClick={handlePlanClick}
+        >
           {plan.buttonText}
         </Button>
       </div>

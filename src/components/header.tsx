@@ -96,21 +96,17 @@ export const CallistraHeader = () => {
                             </div>
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                                 <Button
-                                    asChild
                                     variant="outline"
                                     size="sm"
-                                    className="border-secondary-foreground text-secondary-foreground hover:bg-secondary-foreground hover:text-white">
-                                    <Link href="#" onClick={scrollToContato}>
-                                        <span>Demonstração</span>
-                                    </Link>
+                                    className="border-secondary-foreground text-secondary-foreground hover:bg-secondary-foreground hover:text-white"
+                                    onClick={scrollToContato}>
+                                    <span>Demonstração</span>
                                 </Button>
                                 <Button
-                                    asChild
                                     size="sm"
-                                    className="bg-primary hover:bg-primary/90">
-                                    <Link href="#" onClick={scrollToPlanos}>
-                                        <span>Começar Agora</span>
-                                    </Link>
+                                    className="bg-primary hover:bg-primary/90"
+                                    onClick={scrollToPlanos}>
+                                    <span>Começar Agora</span>
                                 </Button>
                             </div>
                         </div>

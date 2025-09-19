@@ -225,6 +225,11 @@ export function EditablePricingSimple({
 
 // Componente auxiliar para renderizar um plano
 function PlanCard({ plan }: { plan: PlanData }) {
+  const handlePlanClick = () => {
+    // Redirecionar para registro com o plano selecionado
+    window.location.href = `/registro?plan=${plan.id}`;
+  };
+
   return (
     <div className={cn(
       "bg-white border rounded-lg p-6 h-full flex flex-col shadow-sm",
@@ -259,7 +264,10 @@ function PlanCard({ plan }: { plan: PlanData }) {
         </ul>
       </div>
 
-      <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded font-medium hover:bg-blue-700 transition-colors">
+      <button
+        onClick={handlePlanClick}
+        className="mt-6 w-full bg-blue-600 text-white py-3 rounded font-medium hover:bg-blue-700 transition-colors"
+      >
         {plan.buttonText}
       </button>
     </div>
